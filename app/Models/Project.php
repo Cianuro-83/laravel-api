@@ -12,6 +12,8 @@ class Project extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $with = ['type:id,name', 'type.projects', 'technologies'];
+
     protected $fillable=[
         'title',
         'slug',

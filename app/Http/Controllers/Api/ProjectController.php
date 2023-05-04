@@ -12,7 +12,7 @@ class ProjectController extends Controller
     public function index()
     {
 
-        $results = Project::with('type:id,name', 'type.projects', 'technologies')->paginate(5);
+        $results = Project::with('type:id,name', 'technologies')->paginate(5);
 
         return response()->json([
             'success' => true,
@@ -24,18 +24,20 @@ class ProjectController extends Controller
     {
         $project = Project::where('slug', $slug)->first();
 
+        $relatedProject = Project::where('slug', '!=', $slug)->orderBy('created_at', 'desc')->limit(3)->get();
+
+        $project->relatedProjects = $relatedProject;
+
         if ($project) {
             return response()->json([
                 'success' => true,
                 'project' => $project,
             ]);
         } else {
-            if ($project) {
                 return response()->json([
                     'success' => false,
                     'error' => 'Spiacente, ma non sono stati trovati progetti',
                 ]);
-            }
          }
     }
 }

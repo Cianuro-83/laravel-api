@@ -31,6 +31,7 @@ class StoreProjectRequest extends FormRequest
             'checkbox' => 'nullable',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
+            'image' => 'nullable|image|max:1024',
         ];
     }
 }

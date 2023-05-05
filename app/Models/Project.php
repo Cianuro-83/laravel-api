@@ -21,6 +21,7 @@ class Project extends Model
         'description',
         'url',
         'type_id',
+        'cover_image',
     ];
         
         public function type(){

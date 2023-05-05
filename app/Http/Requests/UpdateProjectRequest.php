@@ -35,6 +35,7 @@ class UpdateProjectRequest extends FormRequest
             'customer' =>'required|string',
             'type_id' => 'nullable|exists:types,id',
             'technologies' => 'exists:technologies,id',
+            'image' => 'nullable|image|max:1024',
         ];
     }
 }

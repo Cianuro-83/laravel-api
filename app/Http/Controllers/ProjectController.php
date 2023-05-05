@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Type;
 use App\Models\Technology;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -57,9 +58,14 @@ class ProjectController extends Controller
         $data=$request->validated();
 
         $data['slug']=Str::slug( $data['title'] );
-        
 
+        if ($request->hasFile('image')) {
+            $cover_path = Storage::put('uploads', $data['image']);
+            $data['cover_image'] = $cover_path;
+        }
+        
         $new_project=Project::create($data);
+        
         $request->session()->flash('message', 'Il progetto è stato creato correttamente.');
         
         if(isset($data['technologies'])){

@@ -14,7 +14,7 @@
     <h1 class="py-3 text-uppercase text-center font-weight-bolder text-warning">aggiungi un nuovo lavoro</h1>
 <div class="row">
     <div class="col-12">
-        <form action="{{route("projects.store")}}" method="POST">
+        <form action="{{route("projects.store")}}" method="POST" enctype="multipart/form-data">
           @csrf
         
           <div class="row mb-3">
@@ -88,6 +88,24 @@
                   </div>
                 @enderror
               </div>
+              {{-- UPLOAD --}}
+
+              <div class="row mb-3">
+                <label for="image" class="col-sm-2 col-form-label">IMMAGINE</label>
+                <div class="col-sm-10">
+                  <input type="file" class="form-control @error('image') is-invalid @enderror" id="cover_img" name="image" value="{{ old('image') }}">
+                  @error('image')
+                  <div class="invalid-feedback">
+                    {{$message}}
+                  </div>
+                  @enderror
+                </div>
+              </div>
+
+
+
+
+              
  {{-- TEXTAREA --}}
 
               <div class="form-floating mb-3">
@@ -99,6 +117,7 @@
                 </div>
                 @enderror
                       </div>
+                      
             {{-- RESTA SULLA PAGINA --}}
                       <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="1" id="checkbox" name="checkbox">

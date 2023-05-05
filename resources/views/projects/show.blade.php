@@ -11,6 +11,11 @@
 
 </div>
 <div class="container">
+    @if ($project->cover_image)
+    <div class="container py-5">
+        <img src="{{ asset('storage/'.$project->cover_image ) }}" alt="">
+    </div>
+@endif
     <div class="d-flex align-items-center py-5">
         <div class="me-auto">
             <div>

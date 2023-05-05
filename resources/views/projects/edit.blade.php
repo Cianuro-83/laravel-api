@@ -3,9 +3,14 @@
 @section('content')
 <div class="container">
     <h1 class="py-3 text-uppercase text-center font-weight-bolder text-danger">modifica il lavoro: <br>  {{$project->title}}</h1>
+
+    @if($project->cover_image)
+                <img src="{{ asset('storage/'.$project->cover_image ) }}" alt="" width="150">
+              @endif
+
     <div class="row">
         <div class="col-12">
-            <form action="{{route("projects.update", $project)}}" method="POST">
+            <form action="{{route("projects.update", $project)}}" method="POST" enctype="multipart/form-data">
               @csrf
               @method("PUT")
         
@@ -80,6 +85,21 @@
                   </div>
                 @enderror
               </div>
+ {{-- UPLOAD --}}
+
+ <div class="row mb-3">
+  <label for="image" class="col-sm-2 col-form-label">IMMAGINE</label>
+  <div class="col-sm-10">
+    <input type="file" class="form-control @error('image') is-invalid @enderror" id="cover_img" name="image" value="{{ ('image') }}">
+    @error('image')
+    <div class="invalid-feedback">
+      {{$message}}
+    </div>
+    @enderror
+  </div>
+</div>
+
+
  {{-- TEXTAREA --}}
 
               <div class="form-floating mb-3">

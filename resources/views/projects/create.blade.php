@@ -93,7 +93,7 @@
               <div class="row mb-3">
                 <label for="image" class="col-sm-2 col-form-label">IMMAGINE</label>
                 <div class="col-sm-10">
-                  <input type="file" class="form-control @error('image') is-invalid @enderror" id="cover_img" name="image" value="{{ old('image') }}">
+                  <input type="file" class="form-control @error('image') is-invalid @enderror" id="cover_img" name="image" value="{{ ('image') }}">
                   @error('image')
                   <div class="invalid-feedback">
                     {{$message}}
@@ -101,10 +101,6 @@
                   @enderror
                 </div>
               </div>
-
-
-
-
               
  {{-- TEXTAREA --}}
 

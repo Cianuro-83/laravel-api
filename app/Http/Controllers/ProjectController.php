@@ -118,6 +118,17 @@ class ProjectController extends Controller
         if ($data['title'] != $project->title){
             $data['slug'] = Str::slug($data['title']);
         }
+
+        if ($request->hasFile('image')) {
+            $cover_path = Storage::put('uploads', $data['image']);
+            $data['cover_image'] = $cover_path;
+
+            if ($project->cover_image && Storage::exists($project->cover_image)) {
+                // eliminare l'immagine $post->cover_image solo se presente una vecchia
+                Storage::delete($project->cover_image);
+            }
+        }
+
         $project->update($data);
 
         $request->session()->flash('message', 'Il progetto è stato modificato con successo.');

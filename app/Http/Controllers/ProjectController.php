@@ -169,6 +169,11 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         if ($project->trashed()) {
+            // prima di cancellare definitivamente il progetto elimino il file dell'img che è stato caricato
+
+            if ($project->cover_image && Storage::exists($project->cover_image)) {
+                 Storage::delete($project->cover_image);
+            }
             $project->forceDelete(); // HARD DELETE
         } else {
             $project->delete(); //SOFT DELETE

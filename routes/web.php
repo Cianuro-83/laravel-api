@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
+use App\Mail\NewLead;
+use App\Models\Lead;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,14 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/projects', [ProjectController::class, 'destroyAll'])->name('projects.destroy.all');
 
+
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/new-lead-mail', function () {
+
+    $lead = Lead::first();
+
+    return new NewLead($lead);
+});

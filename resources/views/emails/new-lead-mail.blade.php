@@ -1,9 +1,13 @@
 <h1>
-    Nuovo Contatto!
+    Ciao {{env('APP_NAME')}}
 </h1>
 
 <p>
-    contenuto email
+    Hai ricevuto una nuova richiesta di contatto <br>
+    da: {{$lead->name}} <br>
+    Email: {{$lead->email}} <br>
+    con il seguente testo: <br>
+    {{$lead->message}}
 </p>
 
 

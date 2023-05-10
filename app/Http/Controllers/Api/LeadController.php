@@ -42,6 +42,18 @@ class LeadController extends Controller
         $data = $request->all();
 
         // validazione
+        $validator = Validator::make($data, [
+            'name' => 'required|string|min:2|max:255',
+            'email' => 'required|email|min:2|max:255',
+            'message' => 'required|min:10|max:1000|string'
+        ]);
+
+        if ($validator->fails()){
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ]);
+        }
 
         $lead = Lead::create($data);
 

@@ -47,7 +47,12 @@ class NewLead extends Mailable
     public function content()
     {
         return new Content(
-            view: 'emails.new-lead-mail',
+            // view: 'emails.new-lead-mail',
+            markdown: "vendor.mail.html.message",
+            with:[
+                'lead'=>$this->lead->message,
+                
+            ],
         );
     }
 
